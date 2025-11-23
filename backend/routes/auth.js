@@ -1,5 +1,5 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { findUserByEmail, findUserById, createUser } from '../models/users.js';
 import { authenticateToken } from '../middleware/auth.js';

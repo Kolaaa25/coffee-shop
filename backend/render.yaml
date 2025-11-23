@@ -5,7 +5,7 @@ services:
     env: node
     region: frankfurt
     plan: free
-    buildCommand: npm install && npm rebuild bcrypt --build-from-source
+    buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:

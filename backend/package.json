@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "backup": "node backup-db.js"
+    "backup": "node backup-db.js",
+    "postinstall": "npm rebuild bcrypt --build-from-source"
   },
   "keywords": [
     "express",

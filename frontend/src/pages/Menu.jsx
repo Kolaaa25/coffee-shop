@@ -54,23 +54,42 @@ const Menu = () => {
       <div 
         className="relative h-[60vh] sm:h-[65vh] md:h-[70vh] lg:h-[75vh] xl:h-[80vh] overflow-hidden" 
         style={{
-          backgroundImage: "linear-gradient(135deg, rgba(44, 25, 15, 0.4), rgba(139, 111, 71, 0.3)), url('/Menu.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat'
+          backgroundImage: "linear-gradient(135deg, rgba(44, 25, 15, 0.85), rgba(139, 111, 71, 0.7))",
+          backgroundColor: '#2C1810'
         }}
       >
-        {/* Additional overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-brown/20"></div>
+        {/* Decorative pattern overlay */}
+        <div className="absolute inset-0 opacity-10" 
+             style={{
+               backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
+               backgroundSize: '30px 30px'
+             }}
+        ></div>
         
         <div className="container-custom relative z-10 h-full flex items-center justify-center px-4 sm:px-6 md:px-8">
           <div className="text-center max-w-5xl mx-auto">
             <div className="mb-4 sm:mb-6 md:mb-8 backdrop-blur-sm bg-white/10 rounded-full inline-block p-3 sm:p-4 md:p-5">
-              <img 
-                src="/espresso.png" 
-                alt="Menu" 
-                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto animate-float drop-shadow-xl transition-all duration-300" 
-              />
+              <svg 
+                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto animate-float drop-shadow-xl transition-all duration-300"
+                viewBox="0 0 64 64" 
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="coffeeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style={{stopColor:'#D4A574', stopOpacity:1}} />
+                    <stop offset="100%" style={{stopColor:'#8B6F47', stopOpacity:1}} />
+                  </linearGradient>
+                </defs>
+                <path d="M12 20 L52 20 L48 50 C48 54 44 58 40 58 L24 58 C20 58 16 54 16 50 Z" 
+                      fill="url(#coffeeGradient)" stroke="#FFF" strokeWidth="2"/>
+                <ellipse cx="32" cy="20" rx="20" ry="4" fill="#FFF" opacity="0.3"/>
+                <path d="M52 24 Q60 24 60 32 Q60 40 52 40" 
+                      fill="none" stroke="#FFF" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M22 12 Q20 8 22 6" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round" opacity="0.7"/>
+                <path d="M32 10 Q30 6 32 4" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round" opacity="0.7"/>
+                <path d="M42 12 Q40 8 42 6" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round" opacity="0.7"/>
+              </svg>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-serif font-bold mb-3 sm:mb-4 md:mb-6 lg:mb-8 leading-tight text-white px-2" 
                 style={{

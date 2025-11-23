@@ -35,7 +35,7 @@ const AdminLayout = ({ children }) => {
       >
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-3">
-            <img src="/espresso.png" alt="Logo" className="w-10 h-10" />
+            <img src="/espresso.svg" alt="Logo" className="w-10 h-10" />
             {sidebarOpen && (
               <div>
                 <h1 className="text-xl font-bold text-brown">Coffee House</h1>

@@ -20,7 +20,7 @@ const About = () => {
         
         <div className="relative z-10 text-center px-4">
           <div className="mb-8">
-            <img src="/espresso.png" alt="About Us" className="w-28 h-28 mx-auto animate-float" />
+            <img src="/espresso.svg" alt="About Us" className="w-28 h-28 mx-auto animate-float" />
           </div>
           <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight">
             Our Story

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="cupGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4A574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B6F47;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="coffeeGrad" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#5C2E0F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3E1F0B;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <path d="M 20 30 L 80 30 L 75 80 C 75 85 70 90 65 90 L 35 90 C 30 90 25 85 25 80 Z" fill="url(#cupGrad)" stroke="#5C2E0F" stroke-width="2"/>
+  <ellipse cx="50" cy="30" rx="30" ry="5" fill="url(#coffeeGrad)"/>
+  <path d="M 80 35 Q 95 35 95 50 Q 95 65 80 65" fill="none" stroke="url(#cupGrad)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 35 18 Q 32 12 35 8" fill="none" stroke="#E5D4C1" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 50 15 Q 47 9 50 5" fill="none" stroke="#E5D4C1" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 65 18 Q 62 12 65 8" fill="none" stroke="#E5D4C1" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+</svg>

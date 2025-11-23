@@ -7,24 +7,48 @@ dotenv.config();
 let transporter;
 
 try {
+  // Try port 465 (SSL) first
   transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.EMAIL_PORT) || 465, // Changed from 587 to 465 (SSL)
-    secure: true, // true for port 465, false for 587
+    port: parseInt(process.env.EMAIL_PORT) || 465,
+    secure: true, // SSL
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
-    // Render compatibility - increased timeouts
-    connectionTimeout: 10000, // 10 seconds
+    connectionTimeout: 10000,
     greetingTimeout: 10000,
     socketTimeout: 10000,
-    // Debug mode
     debug: process.env.NODE_ENV === 'development',
     logger: process.env.NODE_ENV === 'development',
   });
+
+  console.log('📧 Email transporter initialized (SSL port 465)');
 } catch (error) {
   console.warn('⚠️  Email transporter initialization failed:', error.message);
+  
+  // Fallback to port 587 with STARTTLS
+  try {
+    transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+      tls: {
+        ciphers: 'SSLv3',
+        rejectUnauthorized: false
+      },
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 10000,
+    });
+    console.log('📧 Email transporter initialized (STARTTLS port 587 - fallback)');
+  } catch (fallbackError) {
+    console.error('❌ Both email transport methods failed:', fallbackError.message);
+  }
 }
 
 // Send order confirmation email
@@ -343,6 +367,16 @@ export const sendContactFormEmail = async (contactData) => {
 
 // Verify email configuration
 export const verifyEmailConfig = async () => {
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.warn('⚠️  EMAIL_USER or EMAIL_PASS not configured in environment variables');
+    console.warn('⚠️  Email service will be disabled. Add these to Render dashboard:');
+    console.warn('   EMAIL_HOST=smtp.gmail.com');
+    console.warn('   EMAIL_PORT=465');
+    console.warn('   EMAIL_USER=your.email@gmail.com');
+    console.warn('   EMAIL_PASS=your_app_password');
+    return false;
+  }
+
   if (!transporter) {
     console.warn('⚠️  Email transporter not initialized');
     return false;
@@ -351,9 +385,15 @@ export const verifyEmailConfig = async () => {
   try {
     await transporter.verify();
     console.log('✅ Email server is ready to send emails');
+    console.log(`📧 Using account: ${process.env.EMAIL_USER}`);
     return true;
   } catch (error) {
     console.error('❌ Email server error:', error.message);
+    console.error('💡 Common fixes:');
+    console.error('   1. Enable 2FA on Gmail');
+    console.error('   2. Generate App Password: https://myaccount.google.com/apppasswords');
+    console.error('   3. Use the 16-char password (no spaces) in EMAIL_PASS');
+    console.error('   4. Check if Render allows SMTP connections');
     return false;
   }
 };

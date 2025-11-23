@@ -1,0 +1,26 @@
+{
+  "name": "Coffee House - Premium Artisan Coffee",
+  "short_name": "Coffee House",
+  "description": "Premium crafted coffee and artisan desserts. Order online for delivery or pickup.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2C1810",
+  "theme_color": "#2C1810",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/espresso.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/espresso.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["food", "shopping"],
+  "screenshots": []
+}

@@ -3,25 +3,38 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create email transporter using Gmail (same config as cleaning service)
+// Create email transporter using Gmail (EXACT COPY from cleaning service)
 export function createTransporter() {
   // Check if Gmail credentials are configured
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.warn('⚠️  EMAIL_USER or EMAIL_PASS not configured');
-    return null;
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || 
+      process.env.EMAIL_USER === 'your-email@gmail.com') {
+    console.log('⚠️  Gmail not configured. Using Ethereal (test) email service.');
+    return createTestTransporter();
   }
 
-  console.log('📧 Configuring Gmail SMTP transporter');
-  console.log(`📧 Using: ${process.env.EMAIL_USER}`);
-  
-  // Use real Gmail SMTP (same as cleaning service)
+  // Use real Gmail SMTP
   return nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.EMAIL_PORT) || 587,
-    secure: false, // Use STARTTLS
+    secure: false,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
+    },
+  });
+}
+
+// Fallback to test email service (EXACT COPY from cleaning service)
+async function createTestTransporter() {
+  const testAccount = await nodemailer.createTestAccount();
+  
+  return nodemailer.createTransporter({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false,
+    auth: {
+      user: testAccount.user,
+      pass: testAccount.pass,
     },
   });
 }

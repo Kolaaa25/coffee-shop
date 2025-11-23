@@ -9,10 +9,15 @@ const router = express.Router();
 // Create new order (protected)
 router.post('/', authenticateToken, async (req, res) => {
   try {
+    console.log('🔍 CREATE ORDER REQUEST:');
+    console.log('User:', req.user);
+    console.log('Body:', JSON.stringify(req.body, null, 2));
+
     const { items, totalAmount, deliveryDetails, paymentIntentId } = req.body;
 
     // Validation
     if (!items || items.length === 0) {
+      console.log('❌ Validation failed: No items');
       return res.status(400).json({ 
         success: false, 
         message: 'Order must contain at least one item' 
@@ -20,6 +25,7 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 
     if (!deliveryDetails || !deliveryDetails.fullName || !deliveryDetails.email) {
+      console.log('❌ Validation failed: Missing delivery details');
       return res.status(400).json({ 
         success: false, 
         message: 'Please provide delivery details' 
@@ -38,11 +44,12 @@ router.post('/', authenticateToken, async (req, res) => {
       status: paymentIntentId ? 'paid' : 'pending'
     });
 
-    console.log('📦 Order created:', {
+    console.log('✅ Order created in database:', {
       orderId: order.id,
       userId: req.user.id,
       email: deliveryDetails.email,
-      total: totalAmount
+      total: totalAmount,
+      itemsCount: items.length
     });
 
     // Send response immediately
@@ -53,6 +60,7 @@ router.post('/', authenticateToken, async (req, res) => {
     });
 
     // Send order confirmation email asynchronously (don't wait for it)
+    console.log('📧 Attempting to send email to:', deliveryDetails.email);
     sendOrderConfirmation({
       email: deliveryDetails.email,
       name: deliveryDetails.fullName,
@@ -60,13 +68,15 @@ router.post('/', authenticateToken, async (req, res) => {
       items: items,
       totalAmount: totalAmount,
       deliveryAddress: deliveryDetails.address
-    }).then(() => {
-      console.log('✅ Order confirmation email sent to:', deliveryDetails.email);
+    }).then((result) => {
+      console.log('✅ Order confirmation email sent:', result);
     }).catch((emailError) => {
       console.error('❌ Email send error:', emailError.message);
+      console.error('Email error details:', emailError);
     });
   } catch (error) {
-    console.error('❌ Create order error:', error);
+    console.error('❌ CREATE ORDER ERROR:', error);
+    console.error('Error stack:', error.stack);
     res.status(500).json({ 
       success: false, 
       message: 'Error creating order: ' + error.message 

@@ -1,0 +1,18 @@
+{
+  "name": "Coffee House - Premium Artisan Coffee",
+  "short_name": "Coffee House",
+  "description": "Premium crafted coffee and artisan desserts",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2C1810",
+  "theme_color": "#2C1810",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/coffee-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

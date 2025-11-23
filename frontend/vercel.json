@@ -1,9 +1,13 @@
 {
   "rewrites": [
     {
-      "source": "/((?!assets|manifest\\.json|robots\\.txt|sitemap\\.xml|favicon\\.ico|.*\\.(jpg|jpeg|png|gif|svg|webp|ico|css|js|json|woff|woff2|ttf|eot)).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ],
   "headers": [
     {

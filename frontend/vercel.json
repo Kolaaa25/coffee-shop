@@ -1,7 +1,20 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/manifest.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!manifest.json|favicon.ico|coffee-icon.svg|favicon.svg|_next|api).*)",
       "destination": "/index.html"
     }
   ]

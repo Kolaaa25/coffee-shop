@@ -19,7 +19,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-3 mb-6 group">
               <div className="w-14 h-14 bg-gradient-to-br from-brown to-brown-dark rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all group-hover:scale-110">
-                <img src="/espresso.svg" alt="Coffee Icon" className="w-8 h-8" />
+                <img src="/favicon.svg" alt="Coffee Icon" className="w-8 h-8" />
               </div>
               <span className="text-3xl font-bold font-serif group-hover:text-brown transition-colors">
                 Coffee House

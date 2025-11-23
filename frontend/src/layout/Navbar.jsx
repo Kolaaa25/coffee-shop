@@ -29,7 +29,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="w-12 h-12 bg-gradient-to-br from-brown to-brown-dark rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all group-hover:scale-110">
-              <img src="/espresso.svg" alt="Coffee Icon" className="w-8 h-8" />
+              <img src="/favicon.svg" alt="Coffee Icon" className="w-8 h-8" />
             </div>
             <span className="text-2xl font-bold font-serif group-hover:text-brown transition-colors">
               Coffee House

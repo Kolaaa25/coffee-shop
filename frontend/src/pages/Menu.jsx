@@ -54,17 +54,14 @@ const Menu = () => {
       <div 
         className="relative h-[60vh] sm:h-[65vh] md:h-[70vh] lg:h-[75vh] xl:h-[80vh] overflow-hidden" 
         style={{
-          backgroundImage: "linear-gradient(135deg, rgba(44, 25, 15, 0.85), rgba(139, 111, 71, 0.7))",
-          backgroundColor: '#2C1810'
+          backgroundImage: "linear-gradient(135deg, rgba(44, 25, 15, 0.6), rgba(139, 111, 71, 0.5)), url('/Cofee Header.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
         }}
       >
-        {/* Decorative pattern overlay */}
-        <div className="absolute inset-0 opacity-10" 
-             style={{
-               backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
-               backgroundSize: '30px 30px'
-             }}
-        ></div>
+        {/* Additional overlay for better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-brown/20"></div>
         
         <div className="container-custom relative z-10 h-full flex items-center justify-center px-4 sm:px-6 md:px-8">
           <div className="text-center max-w-5xl mx-auto">

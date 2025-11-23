@@ -26,21 +26,35 @@ const Login = () => {
       return;
     }
 
+    console.log('🔐 [Login] Attempting authentication...', { isLogin, email: formData.email });
+
     try {
       if (isLogin) {
-        await login({ email: formData.email, password: formData.password });
+        console.log('🔐 [Login] Calling login...');
+        const result = await login({ email: formData.email, password: formData.password });
+        console.log('✅ [Login] Login successful!', result);
         toast.success('Login successful!');
+        navigate('/');
       } else {
-        await register({
+        console.log('🔐 [Login] Calling register...');
+        const result = await register({
           name: formData.name,
           email: formData.email,
           password: formData.password,
         });
+        console.log('✅ [Login] Registration successful!', result);
         toast.success('Account created successfully!');
+        navigate('/');
       }
-      navigate('/');
     } catch (err) {
-      toast.error(error || 'Authentication failed');
+      console.error('❌ [Login] Authentication failed:', err);
+      console.error('❌ [Login] Error details:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status
+      });
+      const errorMessage = err.response?.data?.message || err.message || 'Authentication failed';
+      toast.error(errorMessage);
     }
   };
 

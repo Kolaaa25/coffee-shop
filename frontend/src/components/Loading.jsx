@@ -1,3 +1,5 @@
+import { coffeeIcon } from '../config/icons';
+
 const Loading = ({ fullScreen = false }) => {
   if (fullScreen) {
     return (
@@ -8,7 +10,7 @@ const Loading = ({ fullScreen = false }) => {
             <div className="w-24 h-24 relative">
               {/* Cup */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <img src="/favicon.svg" alt="Loading" className="w-20 h-20 animate-float" />
+                <img src={coffeeIcon} alt="Loading" className="w-20 h-20 animate-float" />
               </div>
               {/* Rotating Circle */}
               <div className="absolute inset-0 border-4 border-transparent border-t-brown border-r-brown rounded-full animate-spin"></div>
@@ -38,7 +40,7 @@ const Loading = ({ fullScreen = false }) => {
           <div className="w-20 h-20 relative">
             {/* Cup */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <img src="/favicon.svg" alt="Loading" className="w-16 h-16 animate-float" />
+              <img src={coffeeIcon} alt="Loading" className="w-16 h-16 animate-float" />
             </div>
             {/* Rotating Circle */}
             <div className="absolute inset-0 border-4 border-transparent border-t-brown border-r-brown rounded-full animate-spin"></div>

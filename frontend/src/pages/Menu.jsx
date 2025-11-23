@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { menuService } from '../services/menu';
 import ProductCard from '../components/ProductCard';
 import Loading from '../components/Loading';
+import { coffeeIcon, menuHeaderImage } from '../config/icons';
 
 const Menu = () => {
   const [items, setItems] = useState([]);
@@ -54,7 +55,7 @@ const Menu = () => {
       <div 
         className="relative h-[60vh] sm:h-[65vh] md:h-[70vh] lg:h-[75vh] xl:h-[80vh] overflow-hidden" 
         style={{
-          backgroundImage: "linear-gradient(135deg, rgba(44, 25, 15, 0.6), rgba(139, 111, 71, 0.5)), url('/coffee-header.jpg')",
+          backgroundImage: `linear-gradient(135deg, rgba(44, 25, 15, 0.6), rgba(139, 111, 71, 0.5)), url('${menuHeaderImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'

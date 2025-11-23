@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { menuService } from '../services/menu';
 import ProductCard from '../components/ProductCard';
 import Loading from '../components/Loading';
+import { coffeeIcon } from '../config/icons';
 
 const Home = () => {
   const [popularItems, setPopularItems] = useState([]);
@@ -44,7 +45,7 @@ const Home = () => {
         
         <div className="relative z-10 text-center px-4 animate-slide-up max-w-5xl">
           <div className="mb-6">
-            <img src="/favicon.svg" alt="Coffee Icon" className="w-24 h-24 mx-auto animate-float" />
+            <img src={coffeeIcon} alt="Coffee Icon" className="w-24 h-24 mx-auto animate-float" />
           </div>
           <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 text-gradient-light leading-tight">
             Premium Crafted Coffee
@@ -221,7 +222,7 @@ const Home = () => {
         <div className="container-custom text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <img src="/favicon.svg" alt="Coffee Icon" className="w-20 h-20 mx-auto opacity-90 animate-float" />
+              <img src={coffeeIcon} alt="Coffee Icon" className="w-20 h-20 mx-auto opacity-90 animate-float" />
             </div>
             <h2 className="text-5xl md:text-7xl font-serif font-bold mb-8 leading-tight">
               Start Your Coffee Journey Today

@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuthStore } from '../stores/authStore';
 import { useCartStore } from '../stores/cartStore';
+import { coffeeIcon } from '../config/icons';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +30,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="w-12 h-12 bg-gradient-to-br from-brown to-brown-dark rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all group-hover:scale-110">
-              <img src="/favicon.svg" alt="Coffee Icon" className="w-8 h-8" />
+              <img src={coffeeIcon} alt="Coffee Icon" className="w-8 h-8" />
             </div>
             <span className="text-2xl font-bold font-serif group-hover:text-brown transition-colors">
               Coffee House

@@ -1,3 +1,5 @@
+import { coffeeIcon } from '../config/icons';
+
 const About = () => {
   return (
     <div className="animate-fade-in">
@@ -20,7 +22,7 @@ const About = () => {
         
         <div className="relative z-10 text-center px-4">
           <div className="mb-8">
-            <img src="/favicon.svg" alt="About Us" className="w-28 h-28 mx-auto animate-float" />
+            <img src={coffeeIcon} alt="About Us" className="w-28 h-28 mx-auto animate-float" />
           </div>
           <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight">
             Our Story

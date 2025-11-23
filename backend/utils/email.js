@@ -30,10 +30,22 @@ async function sendEmail(mailOptions) {
     // Convert nodemailer format to SendGrid format
     const msg = {
       to: mailOptions.to,
-      from: mailOptions.from || `Coffee House <${process.env.SENDGRID_FROM_EMAIL || 'noreply@coffeehouse.com'}>`,
+      from: {
+        email: process.env.SENDGRID_FROM_EMAIL || 'noreply@coffeehouse.com',
+        name: 'Coffee House'
+      },
       subject: mailOptions.subject,
       html: mailOptions.html,
-      replyTo: mailOptions.replyTo,
+      text: mailOptions.text || mailOptions.html.replace(/<[^>]*>/g, ''), // Plain text version
+      replyTo: mailOptions.replyTo || process.env.SENDGRID_FROM_EMAIL,
+      // Anti-spam settings
+      trackingSettings: {
+        clickTracking: { enable: false },
+        openTracking: { enable: false }
+      },
+      mailSettings: {
+        sandboxMode: { enable: false }
+      }
     };
 
     await sgMail.send(msg);
@@ -64,9 +76,8 @@ export const sendOrderConfirmation = async (orderData) => {
     .join('');
 
   const mailOptions = {
-    from: `Coffee House <${process.env.SENDGRID_FROM_EMAIL || process.env.EMAIL_USER || 'noreply@coffeehouse.com'}>`,
     to: email,
-    subject: `✅ Order Confirmation #${orderNumber} - Coffee House`,
+    subject: `Order Confirmation #${orderNumber} - Coffee House`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -270,9 +281,18 @@ export const sendOrderConfirmation = async (orderData) => {
               <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/profile" class="button">View Order Status</a>
             </center>
             
-            <p style="margin-top: 30px; color: #666;">
-              Need help? Contact us at <a href="mailto:matehakola@gmail.com" style="color: #8B6F47;">matehakola@gmail.com</a> 
-              or call <strong>+1 (555) 123-4567</strong>
+            <p style="margin-top: 30px; color: #666; font-size: 14px;">
+              <strong>Questions about your order?</strong><br>
+              Contact our customer service team at <a href="mailto:${process.env.SENDGRID_FROM_EMAIL}" style="color: #8B6F47; text-decoration: none;">${process.env.SENDGRID_FROM_EMAIL}</a>
+              <br>We're here to help Monday-Sunday, 8 AM - 8 PM
+            </p>
+            
+            <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 12px;">
+              This email was sent because you placed an order at Coffee House. 
+              Your order details are confidential and intended only for you.
+              <br><br>
+              Coffee House - Premium Coffee & Beverages<br>
+              Order ID: ${orderNumber}
             </p>
           </div>
           <div class="footer">

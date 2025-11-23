@@ -1,60 +1,44 @@
-import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create email transporter using Gmail (EXACT COPY from cleaning service)
-export function createTransporter() {
-  // Check if Gmail credentials are configured
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || 
-      process.env.EMAIL_USER === 'your-email@gmail.com') {
-    console.log('⚠️  Gmail not configured. Using Ethereal (test) email service.');
-    return createTestTransporter();
-  }
+// Initialize SendGrid
+let emailConfigured = false;
 
-  // Use real Gmail SMTP
-  return nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.EMAIL_PORT) || 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+if (process.env.SENDGRID_API_KEY) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  emailConfigured = true;
+  console.log('✅ SendGrid API configured');
+} else {
+  console.warn('⚠️  SENDGRID_API_KEY not configured - emails will not be sent');
 }
 
-// Fallback to test email service (EXACT COPY from cleaning service)
-async function createTestTransporter() {
-  const testAccount = await nodemailer.createTestAccount();
-  
-  return nodemailer.createTransporter({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false,
-    auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
-    },
-  });
-}
-
-// Initialize transporter
-const transporter = createTransporter();
-
-// Helper to send email
+// Helper to send email using SendGrid
 async function sendEmail(mailOptions) {
-  if (!transporter) {
-    console.warn('⚠️  Email transporter not available');
+  if (!emailConfigured) {
+    console.warn('⚠️  SendGrid not configured, skipping email');
     return { success: false, error: 'Email service not configured' };
   }
 
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    // Convert nodemailer format to SendGrid format
+    const msg = {
+      to: mailOptions.to,
+      from: mailOptions.from || `Coffee House <${process.env.SENDGRID_FROM_EMAIL || 'noreply@coffeehouse.com'}>`,
+      subject: mailOptions.subject,
+      html: mailOptions.html,
+      replyTo: mailOptions.replyTo,
+    };
+
+    await sgMail.send(msg);
+    console.log('✅ Email sent via SendGrid to:', mailOptions.to);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Email send error:', error.message);
+    console.error('❌ SendGrid error:', error.message);
+    if (error.response) {
+      console.error('SendGrid response:', error.response.body);
+    }
     return { success: false, error: error.message };
   }
 }
@@ -75,7 +59,7 @@ export const sendOrderConfirmation = async (orderData) => {
     .join('');
 
   const mailOptions = {
-    from: `"Coffee House ☕" <${process.env.EMAIL_USER}>`,
+    from: `Coffee House <${process.env.SENDGRID_FROM_EMAIL || process.env.EMAIL_USER || 'noreply@coffeehouse.com'}>`,
     to: email,
     subject: `✅ Order Confirmation #${orderNumber} - Coffee House`,
     html: `
@@ -310,8 +294,8 @@ export const sendContactFormEmail = async (contactData) => {
   const { name, email, subject, message } = contactData;
 
   const mailOptions = {
-    from: `"Coffee House Contact" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    from: `Coffee House Contact <${process.env.SENDGRID_FROM_EMAIL || process.env.EMAIL_USER || 'noreply@coffeehouse.com'}>`,
+    to: process.env.SENDGRID_FROM_EMAIL || process.env.EMAIL_USER || 'matehakola@gmail.com',
     replyTo: email,
     subject: `Contact Form: ${subject}`,
     html: `
@@ -351,23 +335,18 @@ export const sendContactFormEmail = async (contactData) => {
 
 // Verify email configuration
 export const verifyEmailConfig = async () => {
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.warn('⚠️  EMAIL_USER or EMAIL_PASS not configured');
+  if (!process.env.SENDGRID_API_KEY) {
+    console.warn('⚠️  SENDGRID_API_KEY not configured');
+    console.warn('💡 Add SENDGRID_API_KEY to environment variables');
     return false;
   }
 
-  if (!transporter) {
-    console.warn('⚠️  Email transporter not initialized');
+  if (!emailConfigured) {
+    console.warn('⚠️  SendGrid not initialized');
     return false;
   }
 
-  try {
-    await transporter.verify();
-    console.log('✅ Email server is ready');
-    console.log(`📧 Using account: ${process.env.EMAIL_USER}`);
-    return true;
-  } catch (error) {
-    console.error('❌ Email verification failed:', error.message);
-    return false;
-  }
+  console.log('✅ SendGrid email service is ready');
+  console.log(`📧 From email: ${process.env.SENDGRID_FROM_EMAIL || 'not set'}`);
+  return true;
 };

@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState({
     todaySales: 0,
     todayOrders: 0,
+    totalRevenue: 0,
     totalCustomers: 0,
     totalOrders: 0,
   });
@@ -46,10 +47,10 @@ const Dashboard = () => {
   ];
 
   const statsCards = [
-    { label: 'Продажі сьогодні', value: loading ? '...' : `$${stats.todaySales.toFixed(2)}`, icon: DollarSign, color: 'bg-green-500' },
-    { label: 'Замовлення сьогодні', value: loading ? '...' : stats.todayOrders.toString(), icon: ShoppingBag, color: 'bg-blue-500' },
+    { label: 'Загальний дохід', value: loading ? '...' : `$${stats.totalRevenue.toFixed(2)}`, icon: DollarSign, color: 'bg-green-500' },
+    { label: 'Продажі сьогодні', value: loading ? '...' : `$${stats.todaySales.toFixed(2)}`, icon: TrendingUp, color: 'bg-blue-500' },
+    { label: 'Всього замовлень', value: loading ? '...' : stats.totalOrders.toString(), icon: ShoppingBag, color: 'bg-orange-500' },
     { label: 'Всього клієнтів', value: loading ? '...' : stats.totalCustomers.toString(), icon: Users, color: 'bg-purple-500' },
-    { label: 'Всього замовлень', value: loading ? '...' : stats.totalOrders.toString(), icon: TrendingUp, color: 'bg-orange-500' },
   ];
 
   return (

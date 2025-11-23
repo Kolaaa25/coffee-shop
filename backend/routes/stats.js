@@ -16,6 +16,11 @@ router.get('/dashboard', async (req, res) => {
       WHERE DATE(created_at) = ?
     `).get(today);
     
+    // Get total revenue (all time)
+    const totalRevenue = db.prepare(`
+      SELECT SUM(total) as total FROM orders
+    `).get();
+    
     // Get total customers
     const totalCustomers = db.prepare('SELECT COUNT(*) as count FROM users').get();
     
@@ -25,6 +30,7 @@ router.get('/dashboard', async (req, res) => {
     res.json({
       todaySales: todayOrders.total || 0,
       todayOrders: todayOrders.count || 0,
+      totalRevenue: totalRevenue.total || 0,
       totalCustomers: totalCustomers.count || 0,
       totalOrders: totalOrders.count || 0,
     });

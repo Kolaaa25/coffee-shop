@@ -5,26 +5,74 @@ dotenv.config();
 
 // Create email transporter with proper Gmail settings
 let transporter;
+let isTestMode = false;
 
-try {
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    throw new Error('EMAIL_USER or EMAIL_PASS not configured');
+// Create Gmail transporter
+async function createGmailTransporter() {
+  try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      throw new Error('EMAIL_USER or EMAIL_PASS not configured');
+    }
+
+    const gmailTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    // Test the connection
+    await gmailTransporter.verify();
+    console.log('✅ Gmail SMTP connection successful');
+    return gmailTransporter;
+  } catch (error) {
+    console.error('❌ Gmail SMTP failed:', error.message);
+    throw error;
   }
-
-  transporter = nodemailer.createTransport({
-    service: 'gmail', // Use Gmail service directly
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-
-  console.log('📧 Email transporter initialized with Gmail service');
-  console.log(`📧 Using account: ${process.env.EMAIL_USER}`);
-} catch (error) {
-  console.error('❌ Email transporter initialization failed:', error.message);
-  console.warn('⚠️  Email service will be disabled');
 }
+
+// Fallback to test email service (Ethereal)
+async function createTestTransporter() {
+  try {
+    console.log('⚠️  Creating fallback test email service...');
+    const testAccount = await nodemailer.createTestAccount();
+    
+    const testTransporter = nodemailer.createTransporter({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      secure: false,
+      auth: {
+        user: testAccount.user,
+        pass: testAccount.pass,
+      },
+    });
+
+    console.log('📧 Test email service initialized');
+    console.log(`📧 Preview emails at: https://ethereal.email/messages`);
+    isTestMode = true;
+    return testTransporter;
+  } catch (error) {
+    console.error('❌ Failed to create test transporter:', error.message);
+    return null;
+  }
+}
+
+// Initialize transporter with fallback
+(async () => {
+  try {
+    transporter = await createGmailTransporter();
+    console.log('📧 Email transporter initialized with Gmail');
+    console.log(`📧 Using account: ${process.env.EMAIL_USER}`);
+  } catch (error) {
+    console.warn('⚠️  Gmail not available, trying fallback...');
+    transporter = await createTestTransporter();
+    if (!transporter) {
+      console.error('❌ All email services failed');
+      console.warn('⚠️  Email service will be disabled');
+    }
+  }
+})();
 
 // Send order confirmation email
 export const sendOrderConfirmation = async (orderData) => {
@@ -277,6 +325,12 @@ export const sendOrderConfirmation = async (orderData) => {
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log('✅ Order confirmation email sent:', info.messageId);
+    
+    // Log preview URL if using test service
+    if (isTestMode && info.messageId) {
+      console.log(`📧 Preview email: ${nodemailer.getTestMessageUrl(info)}`);
+    }
+    
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error('❌ Error sending email:', error);

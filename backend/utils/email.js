@@ -9,16 +9,19 @@ let transporter;
 try {
   transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.EMAIL_PORT) || 587,
-    secure: false, // true for 465, false for other ports
+    port: parseInt(process.env.EMAIL_PORT) || 465, // Changed from 587 to 465 (SSL)
+    secure: true, // true for port 465, false for 587
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
-    // Render compatibility
-    connectionTimeout: 5000,
-    greetingTimeout: 5000,
-    socketTimeout: 5000,
+    // Render compatibility - increased timeouts
+    connectionTimeout: 10000, // 10 seconds
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+    // Debug mode
+    debug: process.env.NODE_ENV === 'development',
+    logger: process.env.NODE_ENV === 'development',
   });
 } catch (error) {
   console.warn('⚠️  Email transporter initialization failed:', error.message);

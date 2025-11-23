@@ -14,7 +14,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!manifest.json|favicon.ico|coffee-icon.svg|favicon.svg|_next|api).*)",
+      "source": "/((?!manifest.json|favicon.ico|coffee-icon.svg|favicon.svg|coffee-header.jpg|_next|api).*)",
       "destination": "/index.html"
     }
   ]

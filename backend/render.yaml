@@ -5,7 +5,7 @@ services:
     env: node
     region: frankfurt
     plan: free
-    buildCommand: npm install
+    buildCommand: npm install --build-from-source
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:

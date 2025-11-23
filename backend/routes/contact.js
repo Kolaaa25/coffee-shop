@@ -1,5 +1,5 @@
 import express from 'express';
-import { sendContactFormEmail } from '../utils/email-sendgrid.js';
+import { sendContactFormEmail } from '../utils/email.js';
 
 const router = express.Router();
 

@@ -3,52 +3,27 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create email transporter
+// Create email transporter with proper Gmail settings
 let transporter;
 
 try {
-  // Try port 465 (SSL) first
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    throw new Error('EMAIL_USER or EMAIL_PASS not configured');
+  }
+
   transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.EMAIL_PORT) || 465,
-    secure: true, // SSL
+    service: 'gmail', // Use Gmail service directly
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
-    debug: process.env.NODE_ENV === 'development',
-    logger: process.env.NODE_ENV === 'development',
   });
 
-  console.log('📧 Email transporter initialized (SSL port 465)');
+  console.log('📧 Email transporter initialized with Gmail service');
+  console.log(`📧 Using account: ${process.env.EMAIL_USER}`);
 } catch (error) {
-  console.warn('⚠️  Email transporter initialization failed:', error.message);
-  
-  // Fallback to port 587 with STARTTLS
-  try {
-    transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      tls: {
-        ciphers: 'SSLv3',
-        rejectUnauthorized: false
-      },
-      connectionTimeout: 10000,
-      greetingTimeout: 10000,
-      socketTimeout: 10000,
-    });
-    console.log('📧 Email transporter initialized (STARTTLS port 587 - fallback)');
-  } catch (fallbackError) {
-    console.error('❌ Both email transport methods failed:', fallbackError.message);
-  }
+  console.error('❌ Email transporter initialization failed:', error.message);
+  console.warn('⚠️  Email service will be disabled');
 }
 
 // Send order confirmation email

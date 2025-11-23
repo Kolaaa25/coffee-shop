@@ -7,7 +7,7 @@ import orderRoutes from './routes/orders.js';
 import paymentRoutes from './routes/payment.js';
 import contactRoutes from './routes/contact.js';
 import statsRoutes from './routes/stats.js';
-import { verifyEmailConfig } from './utils/email-sendgrid.js';
+import { verifyEmailConfig } from './utils/email.js';
 
 dotenv.config();
 

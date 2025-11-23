@@ -1,7 +1,7 @@
 import express from 'express';
 import { authenticateToken } from '../middleware/auth.js';
 import { createOrder, getOrdersByUserId } from '../models/orders.js';
-import { sendOrderConfirmation } from '../utils/email-sendgrid.js';
+import { sendOrderConfirmation } from '../utils/email.js';
 import db from '../database/db.js';
 
 const router = express.Router();

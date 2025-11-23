@@ -1,0 +1,388 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream-light text-primary font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+  
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-cream px-6 py-3 rounded-lg font-medium 
+           hover:bg-primary-light transition-all duration-300 
+           shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+  }
+  
+  .btn-secondary {
+    @apply bg-brown text-white px-6 py-3 rounded-lg font-medium 
+           hover:bg-brown-dark transition-all duration-300 
+           shadow-md hover:shadow-lg;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium 
+           hover:bg-primary hover:text-cream transition-all duration-300;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden 
+           hover:shadow-2xl transition-all duration-300 
+           transform hover:-translate-y-1;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg 
+           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent 
+           transition-all duration-200;
+  }
+  
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-primary mb-4;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5EDE0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8B6F47;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B5232;
+}
+
+/* Advanced Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Responsive float animations */
+@keyframes float-mobile {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-tablet {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes float-desktop {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-25px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 111, 71, 0.5); }
+  50% { box-shadow: 0 0 40px rgba(139, 111, 71, 0.8); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideInFromLeft {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(139, 111, 71, 0.8),
+      0 0 20px rgba(139, 111, 71, 0.6),
+      0 0 30px rgba(139, 111, 71, 0.4);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(139, 111, 71, 1),
+      0 0 30px rgba(139, 111, 71, 0.8),
+      0 0 40px rgba(139, 111, 71, 0.6);
+  }
+}
+
+.animate-float {
+  animation: float-mobile 3s ease-in-out infinite;
+}
+
+/* Responsive float animations */
+@media (min-width: 640px) {
+  .animate-float {
+    animation: float-tablet 3.5s ease-in-out infinite;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animate-float {
+    animation: float-desktop 4s ease-in-out infinite;
+  }
+}
+
+/* Alternative float speeds for variety */
+.animate-float-slow {
+  animation: float-mobile 4s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .animate-float-slow {
+    animation: float-tablet 5s ease-in-out infinite;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animate-float-slow {
+    animation: float-desktop 6s ease-in-out infinite;
+  }
+}
+
+.animate-float-fast {
+  animation: float-mobile 2s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .animate-float-fast {
+    animation: float-tablet 2.5s ease-in-out infinite;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animate-float-fast {
+    animation: float-desktop 3s ease-in-out infinite;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #8B6F47 0%, #D4A574 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-light {
+  background: linear-gradient(135deg, #F5EDE0 0%, #FFFFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 20px rgba(245, 237, 224, 0.3);
+}
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Parallax effect */
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Modern Button Styles */
+.btn-modern {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-modern:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Card Hover Effects */
+.card-hover-3d {
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+}
+
+.card-hover-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg) scale(1.05);
+}
+
+/* Neon Glow Effect */
+.neon-glow {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+/* Ripple Effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s, opacity 0.6s;
+  opacity: 0;
+}
+
+.ripple:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Smooth Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Checkbox/Radio */
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8B6F47;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.custom-checkbox:checked {
+  background: linear-gradient(135deg, #8B6F47, #6B5232);
+  border-color: #6B5232;
+}
+
+.custom-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+}
+
+/* Blur Background */
+.blur-bg {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Typing Animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 3px solid #8B6F47;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+}

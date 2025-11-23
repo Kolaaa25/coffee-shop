@@ -3,6 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Debug: Check environment variables
+console.log('🔍 Checking SendGrid configuration...');
+console.log('SENDGRID_API_KEY exists:', !!process.env.SENDGRID_API_KEY);
+console.log('SENDGRID_FROM_EMAIL:', process.env.SENDGRID_FROM_EMAIL);
+
 // Initialize SendGrid
 let emailConfigured = false;
 

@@ -41,11 +41,17 @@ async function sendEmail(mailOptions) {
       // Anti-spam settings
       trackingSettings: {
         clickTracking: { enable: false },
-        openTracking: { enable: false }
+        openTracking: { enable: false },
+        subscriptionTracking: {
+          enable: false
+        }
       },
       mailSettings: {
-        sandboxMode: { enable: false }
-      }
+        sandboxMode: { enable: false },
+        bypassListManagement: { enable: false }
+      },
+      // Email categories for analytics
+      categories: ['order-confirmation']
     };
 
     await sgMail.send(msg);

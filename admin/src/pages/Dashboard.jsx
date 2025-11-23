@@ -1,8 +1,33 @@
+import { useState, useEffect } from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { TrendingUp, DollarSign, ShoppingBag, Users } from 'lucide-react';
+import axios from '../utils/axios';
 
 const Dashboard = () => {
-  // Демо дані для графіків
+  const [stats, setStats] = useState({
+    todaySales: 0,
+    todayOrders: 0,
+    totalCustomers: 0,
+    totalOrders: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDashboardStats();
+  }, []);
+
+  const fetchDashboardStats = async () => {
+    try {
+      const response = await axios.get('/stats/dashboard');
+      setStats(response.data);
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Демо дані для графіків (поки що)
   const salesData = [
     { name: 'Пн', sales: 4200 },
     { name: 'Вт', sales: 3800 },
@@ -20,11 +45,11 @@ const Dashboard = () => {
     { name: 'Макіато', sales: 98 },
   ];
 
-  const stats = [
-    { label: 'Продажі сьогодні', value: '₴8,450', icon: DollarSign, color: 'bg-green-500' },
-    { label: 'Замовлення', value: '64', icon: ShoppingBag, color: 'bg-blue-500' },
-    { label: 'Клієнти', value: '892', icon: Users, color: 'bg-purple-500' },
-    { label: 'Зріст', value: '+12%', icon: TrendingUp, color: 'bg-orange-500' },
+  const statsCards = [
+    { label: 'Продажі сьогодні', value: loading ? '...' : `$${stats.todaySales.toFixed(2)}`, icon: DollarSign, color: 'bg-green-500' },
+    { label: 'Замовлення сьогодні', value: loading ? '...' : stats.todayOrders.toString(), icon: ShoppingBag, color: 'bg-blue-500' },
+    { label: 'Всього клієнтів', value: loading ? '...' : stats.totalCustomers.toString(), icon: Users, color: 'bg-purple-500' },
+    { label: 'Всього замовлень', value: loading ? '...' : stats.totalOrders.toString(), icon: TrendingUp, color: 'bg-orange-500' },
   ];
 
   return (
@@ -33,7 +58,7 @@ const Dashboard = () => {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
+        {statsCards.map((stat, index) => {
           const Icon = stat.icon;
           return (
             <div key={index} className="card">

@@ -45,26 +45,25 @@ router.post('/', authenticateToken, async (req, res) => {
       total: totalAmount
     });
 
-    // Send order confirmation email
-    try {
-      await sendOrderConfirmation({
-        email: deliveryDetails.email,
-        name: deliveryDetails.fullName,
-        orderNumber: order.id,
-        items: items,
-        totalAmount: totalAmount,
-        deliveryAddress: deliveryDetails.address
-      });
-      console.log('✅ Order confirmation email sent to:', deliveryDetails.email);
-    } catch (emailError) {
-      console.error('❌ Email send error:', emailError.message);
-      // Don't fail the order if email fails
-    }
-
+    // Send response immediately
     res.status(201).json({
       success: true,
-      message: 'Order created successfully. Confirmation email sent!',
+      message: 'Order created successfully!',
       data: order
+    });
+
+    // Send order confirmation email asynchronously (don't wait for it)
+    sendOrderConfirmation({
+      email: deliveryDetails.email,
+      name: deliveryDetails.fullName,
+      orderNumber: order.id,
+      items: items,
+      totalAmount: totalAmount,
+      deliveryAddress: deliveryDetails.address
+    }).then(() => {
+      console.log('✅ Order confirmation email sent to:', deliveryDetails.email);
+    }).catch((emailError) => {
+      console.error('❌ Email send error:', emailError.message);
     });
   } catch (error) {
     console.error('❌ Create order error:', error);

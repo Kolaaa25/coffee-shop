@@ -16,25 +16,24 @@ router.post('/contact', async (req, res) => {
       });
     }
 
-    // Send email
-    const result = await sendContactFormEmail({
+    // Send response immediately
+    res.json({
+      success: true,
+      message: 'Message received! We\'ll get back to you soon.',
+    });
+
+    // Send email asynchronously (don't wait for it)
+    sendContactFormEmail({
       name,
       email,
       subject,
       message,
+    }).then(() => {
+      console.log('✅ Contact form email sent');
+    }).catch((error) => {
+      console.error('❌ Contact form email error:', error.message);
     });
 
-    if (result.success) {
-      res.json({
-        success: true,
-        message: 'Message sent successfully! We\'ll get back to you soon.',
-      });
-    } else {
-      res.status(500).json({
-        success: false,
-        message: 'Failed to send message. Please try again.',
-      });
-    }
   } catch (error) {
     console.error('Contact form error:', error);
     res.status(500).json({

@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+// Ensure API URL always has /api suffix
+const getApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+  // Add /api if not present
+  return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
+};
+
+const API_URL = getApiUrl();
 
 // 🐛 DEBUG: Перевірка API URL
 console.log('🔧 [axios.js] VITE_API_URL from env:', import.meta.env.VITE_API_URL);

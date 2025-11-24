@@ -47,3 +47,4 @@ coverage/
 *.pem
 .vercel
 .cache
+/backend/database/coffee-shop.db

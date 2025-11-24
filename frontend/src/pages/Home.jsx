@@ -31,7 +31,7 @@ const Home = () => {
         className="relative h-screen flex items-center justify-center text-white parallax overflow-hidden"
         style={{
           backgroundImage:
-            'linear-gradient(135deg, rgba(44, 25, 15, 0.50), rgba(139, 111, 71, 0.50)), url(https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&h=1080&fit=crop&q=80)',
+            'linear-gradient(135deg, rgba(44, 25, 15, 0.20), rgba(139, 111, 71, 0.20)), url(https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&h=1080&fit=crop&q=80)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

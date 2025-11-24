@@ -83,11 +83,11 @@ export const menuItems = [
     popular: false,
   },
   {
-    name: 'Cheesecake',
+    name: 'Cheesecake ',
     description: 'Creamy New York-style cheesecake',
     price: 6.99,
     category: 'dessert',
-    image: 'https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=400&h=400&fit=crop',
+    image: '/Cheesecake.jpg',
     popular: false,
   },
   {

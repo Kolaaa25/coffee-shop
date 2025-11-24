@@ -79,7 +79,7 @@ export const menuItems = [
     description: 'Rich and fudgy chocolate brownie',
     price: 4.99,
     category: 'dessert',
-    image: 'frontend/public/Brownie.jpg',
+    image: '/Brownie.jpg',
     popular: false,
   },
   {
@@ -95,7 +95,7 @@ export const menuItems = [
     description: 'Freshly baked with real blueberries',
     price: 3.99,
     category: 'dessert',
-    image: 'frontend/public/BlueberryMuffin.jpg',
+    image: '/BlueberryMuffin.jpg',
     popular: false,
   },
   {
@@ -103,7 +103,7 @@ export const menuItems = [
     description: 'Sweet roll with cinnamon and icing',
     price: 4.49,
     category: 'dessert',
-    image: 'frontend/public/CinnamonRoll.jpg',
+    image: '/CinnamonRoll.jpg',
     popular: false,
   },
   {

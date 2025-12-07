@@ -109,21 +109,21 @@ const AdminOrders = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-900">Orders Management</h1>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+      <div className="space-y-4 md:space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Orders Management</h1>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 md:p-3">
             <p className="text-sm text-blue-800 font-medium">Total Orders: {finalFilteredOrders.length}</p>
           </div>
         </div>
 
         {/* Time Filter Buttons */}
-        <div className="bg-white rounded-xl shadow-md p-4">
+        <div className="bg-white rounded-xl shadow-md p-3 md:p-4">
           <h3 className="text-sm font-semibold text-gray-700 mb-3">Filter by Time Period</h3>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-2 md:gap-3">
             <button
               onClick={() => setTimeFilter('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 timeFilter === 'all'
                   ? 'bg-brown text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -133,7 +133,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setTimeFilter('day')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 timeFilter === 'day'
                   ? 'bg-brown text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -143,7 +143,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setTimeFilter('week')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 timeFilter === 'week'
                   ? 'bg-brown text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -153,7 +153,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setTimeFilter('month')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 timeFilter === 'month'
                   ? 'bg-brown text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -165,12 +165,12 @@ const AdminOrders = () => {
         </div>
 
         {/* Status Filter Buttons */}
-        <div className="bg-white rounded-xl shadow-md p-4">
+        <div className="bg-white rounded-xl shadow-md p-3 md:p-4">
           <h3 className="text-sm font-semibold text-gray-700 mb-3">Filter by Status</h3>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 md:gap-3">
             <button
               onClick={() => setStatusFilter('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 statusFilter === 'all'
                   ? 'bg-brown text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -180,7 +180,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setStatusFilter('pending')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 statusFilter === 'pending'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
@@ -190,7 +190,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setStatusFilter('paid')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 statusFilter === 'paid'
                   ? 'bg-green-600 text-white shadow-md'
                   : 'bg-green-100 text-green-700 hover:bg-green-200'
@@ -200,7 +200,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setStatusFilter('processing')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 statusFilter === 'processing'
                   ? 'bg-yellow-600 text-white shadow-md'
                   : 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
@@ -210,7 +210,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setStatusFilter('completed')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 statusFilter === 'completed'
                   ? 'bg-purple-600 text-white shadow-md'
                   : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
@@ -220,7 +220,7 @@ const AdminOrders = () => {
             </button>
             <button
               onClick={() => setStatusFilter('cancelled')}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm font-medium transition-all ${
                 statusFilter === 'cancelled'
                   ? 'bg-red-600 text-white shadow-md'
                   : 'bg-red-100 text-red-700 hover:bg-red-200'
@@ -231,8 +231,8 @@ const AdminOrders = () => {
           </div>
         </div>
 
-        {/* Status Guide */}
-        <div className="bg-white rounded-xl shadow-md p-6">
+        {/* Status Guide - Hidden on mobile */}
+        <div className="hidden md:block bg-white rounded-xl shadow-md p-6">
           <h2 className="text-lg font-bold text-gray-900 mb-3">📋 Order Status Guide</h2>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="border-l-4 border-blue-500 pl-3">
@@ -258,9 +258,59 @@ const AdminOrders = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">All Orders</h2>
-          <div className="overflow-x-auto">
+        <div className="bg-white rounded-xl shadow-md p-4 md:p-6">
+          <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-4">All Orders</h2>
+          
+          {/* Mobile Cards View */}
+          <div className="block md:hidden space-y-3">
+            {finalFilteredOrders.length > 0 ? (
+              finalFilteredOrders.map((order) => (
+                <div key={order.id} className="border rounded-lg p-3 space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-gray-900">#{order.id}</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getStatusColor(order.status)}`}>
+                      {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                    </span>
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    {order.customer_name || order.user_name || `User #${order.user_id}`}
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="font-medium">${typeof order.total === 'number' ? order.total.toFixed(2) : '0.00'}</span>
+                    <span className="text-gray-500">{new Date(order.created_at).toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex gap-2 pt-2 border-t">
+                    <button 
+                      onClick={() => handleViewDetails(order.id)}
+                      className="flex-1 flex items-center justify-center gap-1 p-2 text-brown bg-brown/10 rounded transition text-sm"
+                    >
+                      <Eye size={16} /> View
+                    </button>
+                    <select
+                      value={order.status}
+                      onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                      className="flex-1 text-sm border border-gray-300 rounded px-2 py-2 focus:ring-2 focus:ring-brown focus:border-transparent"
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="paid">Paid</option>
+                      <option value="processing">Processing</option>
+                      <option value="completed">Completed</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="py-8 text-center text-gray-500">
+                {orders.length === 0 
+                  ? 'No orders yet' 
+                  : 'No orders found with selected filters'}
+              </div>
+            )}
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full">
               <thead className="border-b">
                 <tr className="text-left">
@@ -327,11 +377,11 @@ const AdminOrders = () => {
         {/* Order Details Modal */}
         {showModal && selectedOrder && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-              <h2 className="text-2xl font-bold mb-6 text-gray-900">Order Details #{selectedOrder.id}</h2>
+            <div className="bg-white rounded-xl p-4 md:p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+              <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-900">Order Details #{selectedOrder.id}</h2>
               
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-500">Customer</p>
                     <p className="font-medium">{selectedOrder.user_name || `User #${selectedOrder.user_id}`}</p>
@@ -372,7 +422,7 @@ const AdminOrders = () => {
                 {selectedOrder.shipping_address && (
                   <div className="border-t pt-4 mt-4">
                     <h3 className="font-semibold mb-2">Shipping Address</h3>
-                    <div className="text-gray-700">
+                    <div className="text-gray-700 text-sm">
                       {typeof selectedOrder.shipping_address === 'string' 
                         ? (() => {
                             try {

@@ -51,9 +51,20 @@ app.use('/api', paymentRoutes);
 app.use('/api', contactRoutes);
 app.use('/api/stats', statsRoutes);
 
-// Health check
+// Health check endpoint for monitoring
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Coffee Shop API is running!' });
+  res.json({ 
+    status: 'OK', 
+    message: 'Coffee Shop API is running!',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Ping endpoint specifically for cron-job.org
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
 });
 
 // Error handling middleware

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './layout/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/ScrollToTop';
 
 // Pages
 import Home from './pages/Home';
@@ -11,6 +12,7 @@ import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import About from './pages/About';
+import AboutProject from './pages/AboutProject';
 import Contact from './pages/Contact';
 import PaymentSuccess from './pages/PaymentSuccess';
 import PaymentCancel from './pages/PaymentCancel';
@@ -26,6 +28,7 @@ import AdminSettings from './pages/admin/AdminSettings';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Toaster
         position="top-right"
         toastOptions={{
@@ -73,6 +76,7 @@ function App() {
             }
           />
           <Route path="about" element={<About />} />
+          <Route path="about-project" element={<AboutProject />} />
           <Route path="contact" element={<Contact />} />
           <Route path="payment-success" element={<PaymentSuccess />} />
           <Route path="payment-cancel" element={<PaymentCancel />} />

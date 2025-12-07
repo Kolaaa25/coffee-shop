@@ -1,6 +1,22 @@
 import { coffeeIcon } from '../config/icons';
+import { useState, useEffect } from 'react';
 
-const Loading = ({ fullScreen = false }) => {
+const Loading = ({ fullScreen = false, message = null }) => {
+  const [showSlowMessage, setShowSlowMessage] = useState(false);
+
+  // Show "server waking up" message after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSlowMessage(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const loadingMessage = message || (showSlowMessage 
+    ? "Waking up the server... First load may take up to 30 seconds" 
+    : "Brewing your experience...");
+
   if (fullScreen) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cream-light to-white">
@@ -20,12 +36,17 @@ const Loading = ({ fullScreen = false }) => {
           </div>
           
           <div className="space-y-2">
-            <p className="text-2xl text-primary font-serif font-bold">Brewing your experience...</p>
+            <p className="text-2xl text-primary font-serif font-bold">{loadingMessage}</p>
             <div className="flex justify-center gap-2">
               <div className="w-2 h-2 bg-brown rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
               <div className="w-2 h-2 bg-brown rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
               <div className="w-2 h-2 bg-brown rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
             </div>
+            {showSlowMessage && (
+              <p className="text-sm text-gray-500 mt-4 max-w-xs mx-auto">
+                Free hosting services sleep after inactivity. Thanks for your patience! ☕
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -48,12 +69,19 @@ const Loading = ({ fullScreen = false }) => {
         </div>
         
         <div className="space-y-2">
-          <p className="text-lg text-primary font-medium">Loading...</p>
+          <p className="text-lg text-primary font-medium">
+            {showSlowMessage ? "Waking up server..." : "Loading..."}
+          </p>
           <div className="flex justify-center gap-1.5">
             <div className="w-1.5 h-1.5 bg-brown rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
             <div className="w-1.5 h-1.5 bg-brown rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
             <div className="w-1.5 h-1.5 bg-brown rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
           </div>
+          {showSlowMessage && (
+            <p className="text-xs text-gray-500 mt-2">
+              First load may take up to 30s ☕
+            </p>
+          )}
         </div>
       </div>
     </div>

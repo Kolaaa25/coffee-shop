@@ -31,14 +31,14 @@ const Contact = () => {
   };
 
   return (
-    <div className="py-20 animate-fade-in">
-      <div className="container-custom max-w-6xl">
-        <h1 className="section-title text-center mb-12">Contact Us</h1>
+    <div className="py-16 md:py-20 animate-fade-in">
+      <div className="container-custom max-w-6xl px-4">
+        <h1 className="section-title text-center mb-8 md:mb-12">Contact Us</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Form */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-serif font-bold text-primary mb-6">
+          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h2 className="text-xl md:text-2xl font-serif font-bold text-primary mb-6">
               Send us a Message
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -109,20 +109,20 @@ const Contact = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {/* Contact Details */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-serif font-bold text-primary mb-6">
+            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-primary mb-6">
                 Get in Touch
               </h2>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">📍</span>
+              <div className="space-y-4 md:space-y-6">
+                <div className="flex items-start space-x-3 md:space-x-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg md:text-2xl">📍</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-primary mb-1">Address</h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm md:text-base">
                       1780 Main Street
                       <br />
                       Winnipeg, MB R2V 1Z6
@@ -130,35 +130,35 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">📞</span>
+                <div className="flex items-start space-x-3 md:space-x-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg md:text-2xl">📞</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-primary mb-1">Phone</h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                    <p className="text-gray-600 text-sm md:text-base">+1 (555) 123-4567</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">📧</span>
+                <div className="flex items-start space-x-3 md:space-x-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg md:text-2xl">📧</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-primary mb-1">Email</h3>
-                    <p className="text-gray-600">hello@coffeehouse.com</p>
+                    <p className="text-gray-600 text-sm md:text-base">hello@coffeehouse.com</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">🕐</span>
+                <div className="flex items-start space-x-3 md:space-x-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-brown rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg md:text-2xl">🕐</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-primary mb-1">
                       Business Hours
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm md:text-base">
                       Monday - Friday: 7:00 AM - 9:00 PM
                       <br />
                       Saturday - Sunday: 8:00 AM - 10:00 PM
@@ -169,8 +169,8 @@ const Contact = () => {
             </div>
 
             {/* Map */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-serif font-bold text-primary mb-4">
+            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-primary mb-4">
                 Find Us
               </h2>
               <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">

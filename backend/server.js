@@ -8,6 +8,7 @@ import paymentRoutes from './routes/payment.js';
 import contactRoutes from './routes/contact.js';
 import statsRoutes from './routes/stats.js';
 import { verifyEmailConfig } from './utils/email.js';
+import initializeProductionData from './scripts/initProduction.js';
 
 dotenv.config();
 
@@ -68,6 +69,15 @@ app.use((err, req, res, next) => {
 app.listen(PORT, async () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  
+  // Initialize production data if needed (non-blocking)
+  if (process.env.NODE_ENV === 'production') {
+    try {
+      initializeProductionData();
+    } catch (error) {
+      console.warn('⚠️  Failed to initialize production data:', error.message);
+    }
+  }
   
   // Verify email configuration (non-blocking)
   verifyEmailConfig().catch(err => {

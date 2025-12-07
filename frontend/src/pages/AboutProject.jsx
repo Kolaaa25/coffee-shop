@@ -75,19 +75,20 @@ const AboutProject = () => {
     <div className="animate-fade-in">
       {/* Hero Section */}
       <section
-        className="relative h-screen flex items-center justify-center text-white parallax overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden"
         style={{
           backgroundImage:
             'linear-gradient(135deg, rgba(44, 25, 15, 0.2), rgba(139, 111, 71, 0.2)), url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&h=1080&fit=crop&q=80)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundAttachment: 'scroll',
         }}
       >
         {/* Animated Background Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-brown/40 gradient-animate"></div>
         
         {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-cream/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-10 md:top-20 left-5 md:left-10 w-20 h-20 md:w-32 md:h-32 bg-cream/10 rounded-full blur-3xl animate-float"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-brown/20 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
         
         <div className="relative z-10 text-center px-4 animate-slide-up max-w-5xl">

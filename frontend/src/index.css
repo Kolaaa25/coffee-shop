@@ -386,3 +386,114 @@
   white-space: nowrap;
   animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
 }
+
+/* iOS/iPhone specific fixes for backgrounds */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for iOS Safari background issues */
+  .parallax,
+  [style*="background-attachment: fixed"],
+  [style*="backgroundAttachment: 'fixed'"] {
+    background-attachment: scroll !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  /* Better mobile background handling */
+  section[style*="background-image"] {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    will-change: transform;
+  }
+  
+  /* Prevent iOS zoom on input focus */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+  
+  /* Fix for iOS viewport height */
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+    min-height: 100vh;
+  }
+  
+  /* Force GPU acceleration for smoother backgrounds */
+  body {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Special CSS for better iOS Safari performance */
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  /* High DPI screens optimization */
+  section[style*="background-image"] {
+    background-size: cover !important;
+    background-attachment: scroll !important;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  /* Better image loading for retina */
+  img {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Additional mobile fixes */
+@media (max-width: 768px) {
+  /* Force scroll behavior for backgrounds on mobile */
+  section[style*="background-image"] {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+  
+  /* Optimize animations on mobile */
+  .animate-float {
+    animation-duration: 6s !important;
+  }
+  
+  /* Better text rendering on mobile */
+  body, h1, h2, h3, h4, h5, h6, p, span, div {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* iPhone X and newer screen fixes */
+@media screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3),
+       screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2),
+       screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3),
+       screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3),
+       screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+  
+  /* Safe area handling */
+  .container-custom {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  
+  /* Hero section height optimization for notch */
+  .min-h-screen {
+    min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
+}
+
+/* Specific iPhone landscape fixes */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .min-h-screen {
+    min-height: 100vh !important;
+  }
+  
+  /* Reduce animations on landscape mobile */
+  .animate-float {
+    animation: none !important;
+  }
+}

@@ -28,13 +28,13 @@ const Home = () => {
     <div className="animate-fade-in">
       {/* Hero Section with Parallax */}
       <section
-        className="relative min-h-screen flex items-center justify-center text-white parallax overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden"
         style={{
           backgroundImage:
             'linear-gradient(135deg, rgba(44, 25, 15, 0.20), rgba(139, 111, 71, 0.20)), url(https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&h=1080&fit=crop&q=80)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
+          backgroundAttachment: 'scroll',
         }}
       >
         {/* Animated Background Overlay */}
